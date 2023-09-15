@@ -7,12 +7,7 @@
     <title>Expenses Tracker</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
-
 <body ng-controller="HomeViewController">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
@@ -23,18 +18,14 @@
             </div>
         </div>
     </nav>
-    <div class="container" ng-controller="ExpensesViewController">
-        <div class="row">
-            <div class="col-xs-12">
-                <ul class="list-group">
-                    <li ng-repeat="expense in expenses" class="list-group-item text-center vertical-center">
-                        <span class="float-left mr-2">${{expense.amount | number:2}}</span><span class="float-center">
-                            {{expense.description | uppercase}}</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <div class="container" ng-view>
+        
     </div>
+    <script src="app.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
 
 </body>
 
