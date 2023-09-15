@@ -14,6 +14,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'views/expenseForm.html',
             controller: 'ExpenseViewController'
         })
+        .when('/expenses/edit/:id', {
+            templateUrl: 'views/expenseForm.html',
+            controller: 'ExpenseViewController'
+        })
         .otherwise({
             redirectTo: '/'
         });
@@ -33,6 +37,7 @@ app.controller('ExpensesViewController', ['$scope', function ($scope) {
         { description: 'food', amount: 15, date: '2023-09-04' }
     ];
 }]);
-app.controller('ExpenseViewController', ['$scope', function ($scope) {
-    $scope.someText = 'The world is round';
+app.controller('ExpenseViewController', ['$scope', '$routeParams', function ($scope, $routeParams) {
+    $scope.someText = 'The world is round. ID = ' + $routeParams.id;
+
 }]);
