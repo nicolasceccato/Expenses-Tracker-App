@@ -28,8 +28,8 @@
             <div class="col-xs-12">
                 <ul class="list-group">
                     <li ng-repeat="expense in expenses" class="list-group-item text-center vertical-center">
-                        <span class="float-left mr-2">${{expense.amount}}</span><span class="float-center">
-                            {{expense.description}}</span>
+                        <span class="float-left mr-2">${{expense.amount | number:2}}</span><span class="float-center">
+                            {{expense.description | uppercase}}</span>
                     </li>
                 </ul>
             </div>
