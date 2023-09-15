@@ -1,5 +1,24 @@
 let app = angular.module('expensesApp', ['ngRoute']);
 
+app.config(function ($routeProvider) {
+    $routeProvider
+        .when('/', {
+            templateUrl: 'views/expenses.html',
+            controller: 'ExpensesViewController'
+        })
+        .when('/expenses', {
+            templateUrl: 'views/expenses.html',
+            controller: 'ExpensesViewController'
+        })
+        .when('/expenses/new', {
+            templateUrl: 'views/expenseForm.html',
+            controller: 'ExpenseViewController'
+        })
+        .otherwise({
+            redirectTo: '/'
+        });
+});
+
 app.controller('HomeViewController', ['$scope', function ($scope) {
     $scope.appTitle = "Simple Expenses Tracker";
 }]);
@@ -13,4 +32,7 @@ app.controller('ExpensesViewController', ['$scope', function ($scope) {
         { description: 'bills', amount: 13, date: '2023-09-03' },
         { description: 'food', amount: 15, date: '2023-09-04' }
     ];
+}]);
+app.controller('ExpenseViewController', ['$scope', function ($scope) {
+    $scope.someText = 'The world is round';
 }]);

@@ -1,10 +1,22 @@
-<div class="row">
-    <div class="col-xs-12">
-        <ul class="list-group">
-            <li ng-repeat="expense in expenses" class="list-group-item text-center vertical-center">
-                <span class="float-left mr-2">${{expense.amount | number:2}}</span><span class="float-center">
-                    {{expense.description | uppercase}}</span>
-            </li>
-        </ul>
+<html>
+
+<body>
+    <div class="row">
+        <div class="col-xs-12 button-row">
+            <a href="#expenses/new" class="btn btn-success btn-lg btn-block"><span
+                    class="glyphicon glyphicon-plus"></span>New expense</a>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-xs-12 button-row">
+            <ul class="list-group">
+                <li ng-repeat="expense in expenses" class="list-group-item text-center vertical-center">
+                    <span class="float-left mr-2">${{expense.amount | number:2}}</span><span class="float-center">
+                        {{expense.description | uppercase}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
