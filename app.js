@@ -75,6 +75,12 @@ app.factory('Expenses', function () {
         }
     };
 
+    service.getById = function (id) {
+        return _.find(service.entries, function (entry) {
+            return entry.id == id;
+        })
+    };
+
     service.save = function (entry) {
         entry.id = service.getNewId();
         service.entries.push(entry);
