@@ -1,5 +1,24 @@
 let app = angular.module('expensesApp', ['ngRoute']);
 
+let myHelpers = {
+    dateObjToString: function (dateObj) {
+        let year, month, day;
+        year = String(dateObj.getFullYear());
+        month = String(dateObj.getMonth());
+        if (month.length == 1) {
+            month = "0" + 1;
+        }
+        day = String(dateObj.getDate());
+        if (day.length == 1) {
+            day = "0" + 1;
+        }
+        return year + "-" + month + "-" + day;
+    },
+    stringToDateObj: function (string) {
+        return new Date(string.substring(0, 4), string.substring(5, 7) - 1, string.substring(8, 10));
+    }
+};
+
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
@@ -38,6 +57,10 @@ app.factory('Expenses', function () {
         { id: 5, description: 'bills', amount: 13, date: '2023-09-03' },
         { id: 6, description: 'food', amount: 15, date: '2023-09-04' }
     ];
+
+    service.entries.forEach(function (element) {
+        element.date = myHelpers.stringToDateObj(element.date);
+    });
 
     service.save = function (entry) {
         service.entries.push(entry);
