@@ -1,0 +1,10 @@
+<span class="float-left mr-2">${{expense.amount | number:2}}</span><span class="float-center">
+    {{expense.description | uppercase}}</span>
+
+<button type="button" class="btn btn-danger btn-s pull-right btn-separation-left" ng-click="remove(expense)">
+    <span class="glyphicon glyphicon-trash float-right mr-2"></span> Delete
+</button>
+
+<a href="#/expenses/edit/{{expense.id}}" class="btn btn-primary btn-s pull-right">
+    <span class="glyphicon glyphicon-pencil float-right mr-2"></span> Edit
+</a>

@@ -3,23 +3,16 @@
 <body>
     <div class="row">
         <div class="col-xs-12 button-row">
-            <a href="/#/expenses/new" class="btn btn-success btn-lg btn-block"><span
-                    class="glyphicon glyphicon-plus"></span>New expense</a>
+            <a href="#/expenses/new" class="btn btn-success btn-lg btn-block">
+                <span class="glyphicon glyphicon-plus"></span> New expense
+            </a>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12 button-row">
             <ul class="list-group">
                 <li ng-repeat="expense in expenses" class="list-group-item text-center vertical-center">
-                    <span class="float-left mr-2">${{expense.amount | number:2}}</span><span class="float-center">
-                        {{expense.description | uppercase}}</span>
-
-                    <button type="button" class="btn btn-danger btn-s pull-right btn-separation-left">
-                        <span class="glyphicon glyphicon-trash"></span>
-                    </button>
-                    <a href="#expenses/edit/{{expense.id}}" class="btn btn-primary btn-s pull-right"
-                        ng-click="save(expense.id)"></a>
-                    <span class="glyphicon glyphicon-pencil"></span>
+                    <zva-expense></zva-expense>
                 </li>
             </ul>
         </div>

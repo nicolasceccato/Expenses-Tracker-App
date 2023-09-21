@@ -6,11 +6,11 @@ let myHelpers = {
         year = String(dateObj.getFullYear());
         month = String(dateObj.getMonth());
         if (month.length == 1) {
-            month = "0" + 1;
+            month = "0" + month;
         }
         day = String(dateObj.getDate());
         if (day.length == 1) {
-            day = "0" + 1;
+            day = "0" + day;
         }
         return year + "-" + month + "-" + day;
     },
@@ -41,6 +41,8 @@ app.config(function ($routeProvider) {
             redirectTo: '/'
         });
 });
+
+
 
 app.controller('HomeViewController', ['$scope', function ($scope) {
     $scope.appTitle = "Simple Expenses Tracker";
@@ -92,11 +94,30 @@ app.factory('Expenses', function () {
             service.entries.push(entry);
         }
     };
+
+    service.remove = function (entry) {
+        service.entries = _.reject(service.entries, function (element) {
+            return element.id == entry.id;
+        })
+    };
+
     return service;
 });
 
+
+
 app.controller('ExpensesViewController', ['$scope', 'Expenses', function ($scope, Expenses) {
     $scope.expenses = Expenses.entries;
+
+    $scope.remove = function (expense) {
+        Expenses.remove(expense);
+    };
+    $scope.$watch(function () {
+        return Expenses.entries
+    },
+        function (entries) {
+            $scope.expenses = entries;
+        });
 }]);
 
 app.controller('ExpenseViewController', ['$scope', '$routeParams', '$location', 'Expenses', function ($scope, $routeParams, $location, Expenses) {
@@ -108,6 +129,12 @@ app.controller('ExpenseViewController', ['$scope', '$routeParams', '$location', 
     $scope.save = function () {
         Expenses.save($scope.expense);
         $location.path('/');
-    }
+    };
 }]);
 
+app.directive('zvaExpenses', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'views/expense.html'
+    };
+});
