@@ -82,8 +82,15 @@ app.factory('Expenses', function () {
     };
 
     service.save = function (entry) {
-        entry.id = service.getNewId();
-        service.entries.push(entry);
+
+        let toUpdate = service.getById(entry.id);
+
+        if (toUpdate) {
+            _.extend(toUpdate, entry);
+        } else {
+            entry.id = service.getNewId();
+            service.entries.push(entry);
+        }
     };
     return service;
 });
@@ -94,10 +101,13 @@ app.controller('ExpensesViewController', ['$scope', 'Expenses', function ($scope
 
 app.controller('ExpenseViewController', ['$scope', '$routeParams', '$location', 'Expenses', function ($scope, $routeParams, $location, Expenses) {
     if (!$routeParams.id) {
-        $scope.expense = { id: 7, description: 'something', amount: 10, date: new Date() };
+        $scope.expense = { date: new Date() };
+    } else {
+        $scope.expense = _.clone(Expenses.getById($routeParams.id));
     }
     $scope.save = function () {
         Expenses.save($scope.expense);
         $location.path('/');
     }
 }]);
+
